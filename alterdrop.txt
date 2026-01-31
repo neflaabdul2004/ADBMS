@@ -1,0 +1,122 @@
+1. Add a column ‘SSN’ at the first position in the table EMPLOYEE 
+ 2. Change the data type of the column ‘DOB’ in year the table EMPLOYEE 
+ 3. Delete the column ‘emp_id’ the table EMPLOYEE. 
+ 4. Add the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE 
+ 5. Delete the NULL constraint of ‘age’ in the STUDENT table. 
+ 6. Change the table name EMPLOYEE as PERSON 
+ 7. Delete the table STUDENT1.
+ 
+ mysql> desc employe;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+alter table employe add column SSN varchar(50) first;
+Query OK, 0 rows affected (1.95 sec)
+desc employe;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | varchar(50) | YES  |     | NULL    |       |
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+alter table employe drop emp_id;
+Query OK, 0 rows affected (1.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employe;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | varchar(50) | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table employe modify column dob year;
+Query OK, 0 rows affected (2.70 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employe;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | varchar(50) | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | year        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+alter table employe add constraint c5 unique(adhar_no),add constraint c1 unique(SSN);
+Query OK, 0 rows affected (0.86 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employe;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | varchar(50) | YES  | UNI | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | year        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| roll_no | int          | NO   | PRI | NULL    |       |
+| name    | varchar(50)  | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
+| gender  | char(1)      | YES  |     | m       |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+ alter table student modify age int NULL;
+Query OK, 0 rows affected (1.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| roll_no | int          | NO   | PRI | NULL    |       |
+| name    | varchar(50)  | NO   |     | NULL    |       |
+| age     | int          | YES  |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
+| gender  | char(1)      | YES  |     | m       |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+ALTER TABLE employe RENAME TO PERSON;
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> DESC PERSON;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | varchar(50) | YES  | UNI | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | year        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+DROP TABLE PERSON;
+Query OK, 0 rows affected (0.66 sec)
+
