@@ -119,4 +119,4 @@ mysql> DESC PERSON;
 5 rows in set (0.00 sec)
 DROP TABLE PERSON;
 Query OK, 0 rows affected (0.66 sec)
-
+//
