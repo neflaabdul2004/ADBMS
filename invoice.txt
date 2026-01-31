@@ -4,11 +4,13 @@
  INVOICE_MASTER { inv_id, cust_id(FK), inv_date}
  INVOICE_ITEM { inv_id(FK), p_id (FK), quantity}
  
- 
- 
- 
- create table Customer(cust_id int primary key,cust_address varchar(50),cust_city varchar(50),ph_no varchar(12));
-Query OK, 0 rows affected (0.81 sec)
+  create database invoice;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> use invoice;
+Database changed
+mysql> create table Customer(cust_id int primary key,cust_address varchar(50),cust_city varchar(50),ph_no varchar(12));
+Query OK, 0 rows affected (0.83 sec)
 
 mysql> desc Customer;
 +--------------+-------------+------+-----+---------+-------+
@@ -22,7 +24,7 @@ mysql> desc Customer;
 4 rows in set (0.00 sec)
 
 mysql> create table Product(p_id int primary key,price decimal(3,2)default '0');
-Query OK, 0 rows affected (0.73 sec)
+Query OK, 0 rows affected (1.05 sec)
 
 mysql> desc Product;
 +-------+--------------+------+-----+---------+-------+
@@ -31,9 +33,10 @@ mysql> desc Product;
 | p_id  | int          | NO   | PRI | NULL    |       |
 | price | decimal(3,2) | YES  |     | 0.00    |       |
 +-------+--------------+------+-----+---------+-------+
-2 rows in set (0.01 sec)
-create table invoice_master(inv_id int primary key,cust_id int,inv_date date,foreign key (cust_id) references Customer(cust_id));
-Query OK, 0 rows affected (0.67 sec)
+2 rows in set (0.00 sec)
+
+mysql> create table invoice_master(inv_id int primary key,cust_id int,inv_date date,foreign key (cust_id) references Customer(cust_id));
+Query OK, 0 rows affected (1.08 sec)
 
 mysql> desc invoice_master;
 +----------+------+------+-----+---------+-------+
@@ -43,9 +46,10 @@ mysql> desc invoice_master;
 | cust_id  | int  | YES  | MUL | NULL    |       |
 | inv_date | date | YES  |     | NULL    |       |
 +----------+------+------+-----+---------+-------+
-3 rows in set (0.01 sec)
- create table invoice_item(inv_id int,p_id int,quantity int,primary key(inv_id,p_id),foreign key(inv_id) references invoice_master(inv_id),foreign key (p_id) references Product(p_id));
-Query OK, 0 rows affected (1.79 sec)
+3 rows in set (0.00 sec)
+
+mysql> create table invoice_item(inv_id int,p_id int,quantity int,primary key(inv_id,p_id),foreign key(inv_id) references invoice_master(inv_id),foreign key (p_id) references Product(p_id));
+Query OK, 0 rows affected (0.94 sec)
 
 mysql> desc invoice_item;
 +----------+------+------+-----+---------+-------+
@@ -57,5 +61,6 @@ mysql> desc invoice_item;
 +----------+------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
 
-
+ 
+ 
 
