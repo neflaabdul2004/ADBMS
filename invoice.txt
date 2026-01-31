@@ -60,6 +60,17 @@ mysql> desc invoice_item;
 | quantity | int  | YES  |     | NULL    |       |
 +----------+------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+mysql> show tables;
++-------------------+
+| Tables_in_invoice |
++-------------------+
+| Customer          |
+| Product           |
+| invoice_item      |
+| invoice_master    |
++-------------------+
+4 rows in set (0.01 sec)
+
 
  
  
