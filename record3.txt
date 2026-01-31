@@ -120,3 +120,4 @@ mysql> DESC PERSON;
 DROP TABLE PERSON;
 Query OK, 0 rows affected (0.66 sec)
 
+//
