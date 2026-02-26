@@ -1,0 +1,86 @@
+use nefla;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+ 1. Insert values in EMPLOYEE table. 
+
+
+mysql> show tables;
++-----------------+
+| Tables_in_nefla |
++-----------------+
+| Customer        |
+| Department      |
+| Product         |
+| STudent         |
+| customer        |
+| department      |
+| employe1        |
+| invoice_item    |
+| invoice_master  |
+| order1          |
+| product         |
+| student         |
++-----------------+
+12 rows in set (0.00 sec)
+
+desc employe1;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| city     | varchar(50) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+
+mysql> INSERT INTO employe1 (emp_id, name, city, dob, adhar_no) VALUES  (1, 'Ayisha', 'Calicut', '2000-09-21', '234567890123'), (2, 'Nefla', 'Wayanad','2004-04-04','234556787923'),(3,'Aman','kochi','2001-6-24','234523457896'), 
+    -> (4,'ridhan','kannur','2004-5-1','234523456789');
+Query OK, 4 rows affected (0.13 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from employe1;
++--------+--------+---------+------------+--------------+
+| emp_id | name   | city    | dob        | adhar_no     |
++--------+--------+---------+------------+--------------+
+|      1 | Ayisha | Calicut | 2000-09-21 | 234567890123 |
+|      2 | Nefla  | Wayanad | 2004-04-04 | 234556787923 |
+|      3 | Aman   | kochi   | 2001-06-24 | 234523457896 |
+|      4 | ridhan | kannur  | 2004-05-01 | 234523456789 |
++--------+--------+---------+------------+--------------+
+2. Insert values in STUDENT table. 
+
+mysql> desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| roll_no | int          | NO   | PRI | NULL    |       |
+| name    | varchar(50)  | NO   |     | NULL    |       |
+| age     | int          | YES  |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
+| gender  | char(1)      | YES  |     | m       |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+mysql> insert into student(roll_no,name,age,address,gender)values(2,'fathima',20,'malappuram','f'),(3,'arun',21,'wayanad','m'),(4,'Rishal',18,'calicut','m');
+Query OK, 3 rows affected (0.10 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+---------+------+------------+--------+
+| roll_no | name    | age  | address    | gender |
++---------+---------+------+------------+--------+
+|       1 | najiya  |   19 | kannur     | f      |
+|       2 | fathima |   20 | malappuram | f      |
+|       3 | arun    |   21 | wayanad    | m      |
+|       4 | Rishal  |   18 | calicut    | m      |
++---------+---------+------+------------+--------+
+4 rows in set (0.00 sec)
