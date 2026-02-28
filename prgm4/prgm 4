@@ -1,0 +1,74 @@
+1. List all invoice items, avoid duplicates.    
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|    200 |    2 |        1 |
+|    201 |    3 |        4 |
+|    200 |    2 |        5 |
+|    203 |    5 |        8 |
++--------+------+----------+
+4 rows in set (0.02 sec)
+
+mysql> select distinct inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|    200 |
+|    201 |
+|    203 |
++--------+
+3 rows in set (0.00 sec)
+
+2. List the customer details who not live in ‘tvm’.
+
+mysql> select * from Customer;
++---------+---------+----------------------+-----------+------------+
+| cust_id | Name    | cust_address         | cust_city | ph_no      |
++---------+---------+----------------------+-----------+------------+
+|       1 | Nefla   | Rv house             | wayanad   | 9497321854 |
+|       2 | Sahva   | Vadake ochath  house | calicut   | 9406218542 |
+|       3 | Shaikha | KK house             | Tvm       | 7908864931 |
+|       4 | Ayisha  | kallachi house       | Tvm       | 9497891561 |
+|       5 | Shana   | vaishyan             | kollam    | 9497894369 |
++---------+---------+----------------------+-----------+------------+
+5 rows in set (0.02 sec)
+
+mysql> select * from Customer where cust_city='Tvm';
++---------+---------+----------------+-----------+------------+
+| cust_id | Name    | cust_address   | cust_city | ph_no      |
++---------+---------+----------------+-----------+------------+
+|       3 | Shaikha | KK house       | Tvm       | 7908864931 |
+|       4 | Ayisha  | kallachi house | Tvm       | 9497891561 |
++---------+---------+----------------+-----------+------------+
+2 rows in set (0.00 sec)
+
+3. Display the customer details sorted in ascending by city and descending by names.
+mysql> select * from Customer order by cust_city asc,Name desc;
++---------+---------+----------------------+-----------+------------+
+| cust_id | Name    | cust_address         | cust_city | ph_no      |
++---------+---------+----------------------+-----------+------------+
+|       2 | Sahva   | Vadake ochath  house | calicut   | 9406218542 |
+|       5 | Shana   | vaishyan             | kollam    | 9497894369 |
+|       3 | Shaikha | KK house             | Tvm       | 7908864931 |
+|       4 | Ayisha  | kallachi house       | Tvm       | 9497891561 |
+|       1 | Nefla   | Rv house             | wayanad   | 9497321854 |
++---------+---------+----------------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+4. Find the customer names who have ‘e’ or ‘a’ in them and at least 3 characters in length.
+mysql> select Name from Customer where Name like '%e%' or Name like'%a%' and name like '___%';
++---------+
+| Name    |
++---------+
+| Nefla   |
+| Sahva   |
+| Shaikha |
+| Ayisha  |
+| Shana   |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
