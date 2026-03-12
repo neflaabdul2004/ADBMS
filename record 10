@@ -1,0 +1,41 @@
+1. Create a procedure to find greatest of 3 numbers. 
+
+mysql> create procedure great(a int,b int,c int)
+    -> begin
+    -> declare x,y,z int;
+    -> set x=a;
+    -> set y=b;
+    -> set z=c;
+    -> if x>y and x>z then
+    -> select x as 'greater';
+    -> elseif y>x and y>z then
+    -> select y as 'greater';
+    -> elseif z>x and z>y then
+    -> select z as 'greater';
+    -> end if;
+    -> end$$
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> call great(3,4,6) ;$$
++---------+
+| greater |
++---------+
+|       6 |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+2. Create a procedure to display invoice details of a particular customer.
+
+mysql> create procedure in_det(IN cust_id int) begin select Customer.cust_id,Customer.Name,invoice_master.inv_id,invoice_master.inv_date,invoice_item.p_id,invoice_item.quantity from Customer join invoice_master on Customer.cust_id=invoice_master.cust_id join invoice_item on invoice_master.inv_id=invoice_item.inv_id where Customer.cust_id=cust_id; end$$
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> call in_det(4)$$
++---------+--------+--------+------------+------+----------+
+| cust_id | Name   | inv_id | inv_date   | p_id | quantity |
++---------+--------+--------+------------+------+----------+
+|       4 | Ayisha |    201 | 2025-04-04 |    3 |        4 |
++---------+--------+--------+------------+------+----------+
+1 row in set (0.06 sec)
+
