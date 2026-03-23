@@ -1,0 +1,94 @@
+1. Write a MongoDB query to sort customer details in ascending order of their name.
+
+invoice> db.customer.find().sort({name:1})
+[
+  {
+    _id: ObjectId('69b7acbb15e73ff136ef635a'),
+    name: 'ayisha',
+    city: 'malappuram',
+    ph_no: 7854663428
+  },
+  {
+    _id: ObjectId('69b7acbb15e73ff136ef6359'),
+    name: 'naji',
+    city: 'tvm',
+    ph_no: 9643276590
+  },
+  {
+    _id: ObjectId('69b7acbb15e73ff136ef6356'),
+    name: 'nefla',
+    city: 'wayanad',
+    'ph-no': 9562343567
+  },
+  {
+    _id: ObjectId('69b7acbb15e73ff136ef6358'),
+    name: 'ridhan',
+    city: 'ekm',
+    ph_no: 8845762310
+  }
+]
+
+2. Write a MongoDB query to count number of customers in each city.
+ 
+invoice> db.customer.aggregate([{$group:{_id:"$city",total:{$sum:1}}}])
+[
+  { _id: 'malappuram', total: 1 },
+  { _id: 'ekm', total: 1 },
+  { _id: 'tvm', total: 1 },
+  { _id: 'wayanad', total: 1 }
+]
+invoice> 
+
+3. Write a MongoDB query to find minimum and maximum price in each city. 
+
+invoice> db.product.aggregate([{$group:{_id:"$pname",max_price:{$max:"$price"},min_price:{$min:"$price"}}}])
+[
+  { _id: 'pencil', max_price: 5, min_price: 5 },
+  { _id: 'notebook', max_price: 50, min_price: 50 },
+  { _id: 'soap', max_price: 10, min_price: 10 },
+  { _id: 'pen', max_price: 10, min_price: 4 },
+  { _id: 'bag', max_price: 350, min_price: 350 },
+  { _id: 'watch', max_price: 500, min_price: 500 }
+]
+
+
+4. Write a MongoDB query using the $match stage to retrieve all customer documents whose
+customer_name starts with the letter “a”.
+
+invoice> db.customer.aggregate([{$match:{name:{$regex:"^a"}}}])
+[
+  {
+    _id: ObjectId('69b7acbb15e73ff136ef635a'),
+    name: 'ayisha',
+    city: 'malappuram',
+    ph_no: 7854663428
+  }
+]
+
+5. Write a query using $lookup to join CUSTOMER and PRODUCT collections and display only customer name, product name, and price.
+
+[
+  { name: 'nefla', pname: 'watch' },
+  { name: 'nefla', pname: 'soap' },
+  { name: 'nefla', pname: 'pen' },
+  { name: 'nefla', pname: 'pencil' },
+  { name: 'nefla', pname: 'notebook' },
+  { name: 'nefla', pname: 'bag' },
+  { name: 'nefla', pname: 'pen' },
+  { name: 'ridhan', pname: 'watch' },
+  { name: 'ridhan', pname: 'soap' },
+  { name: 'ridhan', pname: 'pen' },
+  { name: 'ridhan', pname: 'pencil' },
+  { name: 'ridhan', pname: 'notebook' },
+  { name: 'ridhan', pname: 'bag' },
+  { name: 'ridhan', pname: 'pen' },
+  { name: 'naji', pname: 'watch' },
+  { name: 'naji', pname: 'soap' },
+  { name: 'naji', pname: 'pen' },
+  { name: 'naji', pname: 'pencil' },
+  { name: 'naji', pname: 'notebook' },
+  { name: 'naji', pname: 'bag' }
+]
+
+
+

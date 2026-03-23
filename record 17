@@ -1,0 +1,58 @@
+1. Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database. 
+
+
+invoice> db.createUser({user:"CUSTOMER1",pwd:"1234",roles:[{role:"read", db:"invoice"}]});
+{ ok: 1 }
+invoice> db.getUsers()
+{
+  users: [
+    {
+      _id: 'invoice.CUSTOMER1',
+      userId: UUID('4eca4035-a12b-4842-9c89-37a4f04ee351'),
+      user: 'CUSTOMER1',
+      db: 'invoice',
+      roles: [ { role: 'read', db: 'invoice' } ],
+      mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+    }
+  ],
+  ok: 1
+}
+
+2. Write a MongoDB query to create the backup for the INVOICE database.
+
+ mongodump --db invoice --out ~/invoice_backup
+2026-03-23T11:32:49.315+0530	writing invoice.customer to /home/ksb/invoice_backup/invoice/customer.bson
+2026-03-23T11:32:49.316+0530	done dumping invoice.customer (4 documents)
+2026-03-23T11:32:49.347+0530	writing invoice.product to /home/ksb/invoice_backup/invoice/product.bson
+2026-03-23T11:32:49.348+0530	done dumping invoice.product (7 documents)
+
+
+3. Write a MongoDB query to restore a particular database or a collection. 
+
+ mongorestore --db ksb --drop dump/ksb
+2026-03-23T11:44:31.859+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2026-03-23T11:44:31.859+0530	building a list of collections to restore from dump/ksb dir
+2026-03-23T11:44:31.859+0530	reading metadata for ksb.MCA from dump/ksb/MCA.metadata.json
+2026-03-23T11:44:31.860+0530	reading metadata for ksb.customer from dump/ksb/customer.metadata.json
+2026-03-23T11:44:31.860+0530	dropping collection ksb.customer before restoring
+2026-03-23T11:44:31.860+0530	dropping collection ksb.MCA before restoring
+2026-03-23T11:44:32.238+0530	restoring ksb.customer from dump/ksb/customer.bson
+2026-03-23T11:44:32.308+0530	finished restoring ksb.customer (2 documents, 0 failures)
+2026-03-23T11:44:32.356+0530	restoring ksb.MCA from dump/ksb/MCA.bson
+2026-03-23T11:44:32.367+0530	finished restoring ksb.MCA (0 documents, 0 failures)
+2026-03-23T11:44:32.367+0530	no indexes to restore for collection ksb.MCA
+2026-03-23T11:44:32.367+0530	no indexes to restore for collection ksb.customer
+2026-03-23T11:44:32.367+0530	2 document(s) restored successfully. 0 document(s) failed to restore.
+ 
+ 
+ 4. Write a MongoDB query to create an index for the collection customer using the field customer_name.
+ 
+ invoice> db.customer.createIndex({ customer_name: 1 })
+customer_name_1
+invoice>  db.customer.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { customer_name: 1 }, name: 'customer_name_1' }
+]
+
+
